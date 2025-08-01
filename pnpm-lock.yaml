@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      core-js:
+        specifier: ^3.44.0
+        version: 3.44.0
     devDependencies:
       '@marp-team/marp-cli':
         specifier: ^3.4.0
@@ -334,6 +338,9 @@ packages:
   commander@8.3.0:
     resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==}
     engines: {node: '>= 12'}
+
+  core-js@3.44.0:
+    resolution: {integrity: sha512-aFCtd4l6GvAXwVEh3XbbVqJGHDJt0OZRa+5ePGx3LLwi12WfexqQxcsohb2wgsa/92xtl19Hd66G/L+TaAxDMw==}
 
   cosmiconfig@8.3.6:
     resolution: {integrity: sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==}
@@ -1326,6 +1333,8 @@ snapshots:
   commander@2.20.3: {}
 
   commander@8.3.0: {}
+
+  core-js@3.44.0: {}
 
   cosmiconfig@8.3.6:
     dependencies:

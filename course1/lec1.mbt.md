@@ -51,20 +51,17 @@ $$
 \begin{array} {|c|c|c|c|}
  \text{课程} & \text{主题} & \text{课程} & \text{主题} \\
  \hline
- 1 & \text{课程介绍与程序设计} & 10 & \text{接口：集合与表} \\
- 2 & \text{面向值编程} & 11 & \text{Optional / 结构体 / Unit, Sequencing, 命令}\\
- 3 & \text{函数, 列表与递归} & 12 & \text{可变状态, Aliasing与可变数据结构} \\
- 4 & \text{列表, 元组, 嵌套模式} & 13 & \text{抽象堆栈结构机器} \\
- 5 & \text{数据类型与树} & 14 & \text{可变队列} \\
- 6 & \text{树与二分查找} & 15 & \text{迭代与尾递归} \\
- 7 & \text{二叉搜索树的插入与删除} & 16 & \text{闭包与对象} \\
- 8 & \text{泛型与高阶函数} & 17 & \text{案例：句法分析器与程序解释器} \\
- 9 & \text{高阶函数：Transform与Fold} & 18 & \text{案例：自动积分与小游戏} \\
+ 1 & \text{课程介绍与程序设计} &  8 & \text{队列：可变数据实现} \\
+ 2 & \text{月兔中的表达式} & 9 & \text{特征 / 接口} \\
+ 3 & \text{函数, 列表与递归} & 10 & \text{哈希表与闭包} \\
+ 4 & \text{多元组、结构体、枚举类型、错误处理} & 11 & \text{案例：语法解析器}\\
+ 5 & \text{树} & 12 & \text{案例：自动微分} \\
+ 6 & \text{泛型与高阶函数} & 13 & \text{案例： 基于梯度下降的神经网络} \\
+ 7 & \text{命令式编程} & 14 & \text{案例：TODO MVC} \\
 \end{array}
 $$
 
 - 所有课程资料均在互联网上公开
-- 课程论坛：[taolun.moonbitlang.cn](https://taolun.moonbitlang.cn)
 
 
 --- 
@@ -97,13 +94,16 @@ $$
 # 步骤1：理解问题
 
 - 涉及到哪些概念
-    - 当前拥有水瓶数量与喝过的水瓶总数
+    - 满水瓶：可以直接喝的水瓶
+    - 空水瓶：喝完后的空瓶，可以用于兑换
+    - 总水瓶数：累计喝掉的水瓶数量
 - 它们之间的关系怎样？
-    - 初始拥有水瓶数为`num_bottles`
-    - 当拥有的水瓶数超过`num_exchange`时，我们可以喝掉`num_exchange`瓶水并换得一瓶水，并且继续操作
-    - 当拥有的水瓶数少于`num_exchange`时，我们只能将拥有的水瓶全部喝完，并结束
+    - 初始拥有满水瓶数为 `num_bottles`，空水瓶数和总水瓶数为 0
+    - 喝掉所有满水瓶后，得到等量空瓶，增加总水瓶数
+    - 每 `num_exchange` 个空瓶可以兑换一瓶满水瓶
+    - 重复此过程直到空瓶不足以兑换
 - 我们要取得什么？
-    - 给定一开始的水瓶数`num_bottles`和交换的条件`num_exchange`，计算最多可以喝多少瓶水
+    - 给定初始满水瓶数 `num_bottles` 和交换条件`num_exchange`，计算最多喝几瓶
 ---
 
 # 步骤二：定义接口
@@ -112,7 +112,7 @@ $$
 
 ```moonbit
 fn num_water_bottles_(num_bottles: Int, num_exchange: Int) -> Int {
-    abort("To be done")
+    ...
 }
 ```
 
@@ -134,25 +134,20 @@ test {
 一个可能的实现
 
 ```moonbit
-fn num_water_bottles(num_bottles: Int, num_exchange: Int) -> Int {
-  fn consume(num_bottles, num_drunk) {
-    if num_bottles >= num_exchange {
-      let num_bottles = num_bottles - num_exchange + 1
-      let num_drunk = num_drunk + num_exchange
-      consume(num_bottles, num_drunk)
+fn num_water_bottles(num_bottles : Int, num_exchange : Int) -> Int {
+  for num_full = num_bottles, num_empty = 0, num_total = 0 {
+    if num_full > 0 {
+      continue 0, num_empty + num_full, num_total + num_full
+    } else if num_empty > num_exchange {
+      continue num_empty / num_exchange, num_empty % num_exchange, num_total
     } else {
-      num_bottles + num_drunk
+      break num_total
     }
   }
-  consume(num_bottles, 0)
 }
 
 // 省略测试代码
 ```
-
----
-
-# [运行起来！](https://try.moonbitlang.cn/#bc2238e7)
 
 ---
 

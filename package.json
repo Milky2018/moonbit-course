@@ -10,5 +10,8 @@
   },
   "scripts": {
     "theme": "npx sass theme/custom.scss custom.css"
+  },
+  "dependencies": {
+    "core-js": "^3.44.0"
   }
 }
