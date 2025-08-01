@@ -4,17 +4,16 @@
 // You have `num_bottles` bottles of water at the beginning.  
 // How many bottles of water can you drink at most?
 // 你最初拥有`num_bottles`瓶水，最多能喝几瓶水？
-fn num_water_bottles(num_bottles: Int, num_exchange: Int) -> Int {
-  fn consume(num_bottles, num_drunk) {
-    if num_bottles >= num_exchange {
-      let num_bottles = num_bottles - num_exchange + 1
-      let num_drunk = num_drunk + num_exchange
-      consume(num_bottles, num_drunk)
+fn num_water_bottles(num_bottles : Int, num_exchange : Int) -> Int {
+  for num_full = num_bottles, num_empty = 0, num_total = 0 {
+    if num_full > 0 {
+      continue 0, num_empty + num_full, num_total + num_full
+    } else if num_empty >= num_exchange {
+      continue num_empty / num_exchange, num_empty % num_exchange, num_total
     } else {
-      num_bottles + num_drunk
+      break num_total
     }
   }
-  consume(num_bottles, 0)
 }
 
 // We recommend the test driven development

@@ -138,7 +138,7 @@ fn num_water_bottles(num_bottles : Int, num_exchange : Int) -> Int {
   for num_full = num_bottles, num_empty = 0, num_total = 0 {
     if num_full > 0 {
       continue 0, num_empty + num_full, num_total + num_full
-    } else if num_empty > num_exchange {
+    } else if num_empty >= num_exchange {
       continue num_empty / num_exchange, num_empty % num_exchange, num_total
     } else {
       break num_total
